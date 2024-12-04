@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Calculator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="display">
+        <div class="memory-indicator"></div>
+        <div class="previous-operand"></div>
+        <div class="current-operand">0</div>
+      </div>
+      <div class="buttons">
+        <button class="special" data-action="clear">AC</button>
+        <button class="special" data-action="backspace">⌫</button>
+        <button class="special" data-action="percent">%</button>
+        <button class="operator" data-action="divide">÷</button>
+        <button class="digit">7</button>
+        <button class="digit">8</button>
+        <button class="digit">9</button>
+        <button class="operator" data-action="multiply">×</button>
+        <button class="digit">4</button>
+        <button class="digit">5</button>
+        <button class="digit">6</button>
+        <button class="operator" data-action="subtract">-</button>
+        <button class="digit">1</button>
+        <button class="digit">2</button>
+        <button class="digit">3</button>
+        <button class="operator" data-action="add">+</button>
+        <button class="digit">0</button>
+        <button class="digit">.</button>
+        <button class="special" data-action="negate">±</button>
+        <button class="operator" data-action="equals">=</button>
+        <button class="memory" data-action="memory-clear">MC</button>
+        <button class="memory" data-action="memory-recall">MR</button>
+        <button class="memory" data-action="memory-add">M+</button>
+        <button class="memory" data-action="memory-subtract">M-</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
