@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Limited Time Offer Timer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="limited-time-offer-timer" class="timer-container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="timer-icon"
+      >
+        <path d="M10 2h4"></path>
+        <path d="M12 14v-4"></path>
+        <circle cx="12" cy="14" r="8"></circle>
+      </svg>
+      <span class="timer-text">Limited Time Offer Ends In:</span>
+      <div class="timer-units">
+        <div class="timer-unit">
+          <div class="timer-value" id="days">00</div>
+          <span class="timer-label">d</span>
+        </div>
+        <div class="timer-unit">
+          <div class="timer-value" id="hours">00</div>
+          <span class="timer-label">h</span>
+        </div>
+        <div class="timer-unit">
+          <div class="timer-value" id="minutes">00</div>
+          <span class="timer-label">m</span>
+        </div>
+        <div class="timer-unit">
+          <div class="timer-value" id="seconds">00</div>
+          <span class="timer-label">s</span>
+        </div>
+      </div>
+    </div>
+    <script src="./timer.js"></script>
+  </body>
+</html>

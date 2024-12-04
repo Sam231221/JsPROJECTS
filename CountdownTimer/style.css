@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.timer-container {
+  background-color: #564cd6;
+  color: white;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.timer-icon {
+  color: #fbbf24;
+}
+
+.timer-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.timer-units {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.timer-unit {
+  display: flex;
+  align-items: center;
+}
+
+.timer-value {
+  background-color: #1f2937;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.timer-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-left: 0.25rem;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.timer-value {
+  animation: pulse 1s infinite;
+}

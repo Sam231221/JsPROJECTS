@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD App with Vanilla JS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Posts CRUD App</h1>
+      <div id="spinner"></div>
+      <div id="posts-container"></div>
+      <div id="pagination"></div>
+      <form id="post-form">
+        <input type="hidden" id="post-id" />
+        <input type="text" id="title" placeholder="Title" required />
+        <textarea id="body" placeholder="Body" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <button id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+    </div>
+    <script type="module" src="spinner.js"></script>
+    <script type="module" src="app.js"></script>
+    <script type="module" src="theme.js"></script>
+  </body>
+</html>
