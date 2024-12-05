@@ -98,6 +98,20 @@ button:active {
   transform: scale(0.95);
 }
 
+.memory-feedback {
+  background-color: #2ecc71;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.memory-feedback.show {
+  opacity: 1;
+}
+
 @media (max-width: 480px) {
   .calculator {
     width: 100%;

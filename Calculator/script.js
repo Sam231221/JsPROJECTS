@@ -5,25 +5,31 @@ class Calculator {
     this.operation = undefined;
     this.memory = 0;
     this.isMemorySet = false;
+    this.isNewInput = true;
   }
 
   clear() {
     this.currentOperand = "0";
     this.previousOperand = "";
     this.operation = undefined;
+    this.isNewInput = true;
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1);
-    if (this.currentOperand === "") this.currentOperand = "0";
+    if (this.currentOperand.length === 1) {
+      this.currentOperand = "0";
+    } else {
+      this.currentOperand = this.currentOperand.slice(0, -1);
+    }
   }
 
   appendNumber(number) {
-    if (number === "." && this.currentOperand.includes(".")) return;
-    this.currentOperand =
-      this.currentOperand === "0"
-        ? number.toString()
-        : this.currentOperand.toString() + number.toString();
+    if (this.isNewInput) {
+      this.currentOperand = number.toString();
+      this.isNewInput = false;
+    } else {
+      this.currentOperand += number.toString();
+    }
   }
 
   chooseOperation(operation) {
@@ -34,6 +40,7 @@ class Calculator {
     this.operation = operation;
     this.previousOperand = this.currentOperand;
     this.currentOperand = "";
+    this.isNewInput = true;
   }
 
   compute() {
@@ -57,48 +64,95 @@ class Calculator {
       default:
         return;
     }
-    this.currentOperand = computation;
+    this.currentOperand = computation.toString();
     this.operation = undefined;
     this.previousOperand = "";
+    this.isNewInput = true;
   }
 
   percentage() {
-    this.currentOperand = parseFloat(this.currentOperand) / 100;
+    this.currentOperand = (parseFloat(this.currentOperand) / 100).toString();
   }
 
   negate() {
-    this.currentOperand = parseFloat(this.currentOperand) * -1;
+    this.currentOperand = (parseFloat(this.currentOperand) * -1).toString();
   }
 
   memoryAdd() {
-    this.memory += parseFloat(this.currentOperand);
-    this.isMemorySet = true;
+    this.memory += parseFloat(this.currentOperand) || 0;
+    this.isMemorySet = this.memory !== 0;
+    this.updateMemoryIndicator();
+    this.showMemoryFeedback("Added to memory");
+    this.isNewInput = true;
   }
 
   memorySubtract() {
-    this.memory -= parseFloat(this.currentOperand);
-    this.isMemorySet = true;
+    this.memory -= parseFloat(this.currentOperand) || 0;
+    this.isMemorySet = this.memory !== 0;
+    this.updateMemoryIndicator();
+    this.showMemoryFeedback("Subtracted from memory");
+    this.isNewInput = true;
   }
 
   memoryRecall() {
-    this.currentOperand = this.memory.toString();
+    if (this.isMemorySet) {
+      this.currentOperand = this.memory.toString();
+      this.showMemoryFeedback("Recalled from memory");
+      this.isNewInput = true;
+    }
   }
 
   memoryClear() {
     this.memory = 0;
     this.isMemorySet = false;
+    this.updateMemoryIndicator();
+    this.showMemoryFeedback("Memory cleared");
   }
 
   updateDisplay() {
     document.querySelector(".current-operand").innerText =
-      this.currentOperand || "0";
+      this.getDisplayNumber(this.currentOperand);
     if (this.operation != null) {
       document.querySelector(
         ".previous-operand"
-      ).innerText = `${this.previousOperand} ${this.operation}`;
+      ).innerText = `${this.getDisplayNumber(this.previousOperand)} ${
+        this.operation
+      }`;
     } else {
       document.querySelector(".previous-operand").innerText = "";
     }
+  }
+
+  getDisplayNumber(number) {
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split(".")[0]);
+    const decimalDigits = stringNumber.split(".")[1];
+    let integerDisplay;
+    if (isNaN(integerDigits)) {
+      integerDisplay = "";
+    } else {
+      integerDisplay = integerDigits.toLocaleString("en", {
+        maximumFractionDigits: 0,
+      });
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`;
+    } else {
+      return integerDisplay;
+    }
+  }
+
+  showMemoryFeedback(action) {
+    const feedbackElement = document.querySelector(".memory-feedback");
+    feedbackElement.textContent = action;
+    feedbackElement.classList.add("show");
+    setTimeout(() => {
+      feedbackElement.classList.remove("show");
+    }, 1000);
+  }
+
+  //The memory indicator is  toggled based on whether there's a non-zero value in memory.
+  updateMemoryIndicator() {
     document
       .querySelector(".memory-indicator")
       .classList.toggle("active", this.isMemorySet);
@@ -176,42 +230,3 @@ document.addEventListener("keydown", (e) => {
 
 // Initial display update
 calculator.updateDisplay();
-
-// Ensure the display shows 0 on load
-document.querySelector(".current-operand").innerText = "0";
-
-// For demonstration purposes, let's perform some calculations
-console.log("Demonstration of calculator functionality:");
-
-calculator.appendNumber(5);
-calculator.chooseOperation("+");
-calculator.appendNumber(3);
-calculator.compute();
-console.log("5 + 3 =", calculator.currentOperand);
-
-calculator.clear();
-calculator.appendNumber(10);
-calculator.chooseOperation("×");
-calculator.appendNumber(4);
-calculator.compute();
-console.log("10 × 4 =", calculator.currentOperand);
-
-calculator.percentage();
-console.log("Result as percentage:", calculator.currentOperand);
-
-calculator.negate();
-console.log("Negated result:", calculator.currentOperand);
-
-calculator.memoryAdd();
-console.log("Added to memory");
-
-calculator.clear();
-calculator.appendNumber(50);
-calculator.memorySubtract();
-console.log("Subtracted 50 from memory");
-
-calculator.memoryRecall();
-console.log("Memory recall:", calculator.currentOperand);
-
-calculator.memoryClear();
-console.log("Memory cleared");
