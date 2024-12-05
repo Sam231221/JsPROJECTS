@@ -13,6 +13,7 @@ const paginationContainer = document.getElementById("pagination");
 
 const spinner = new Spinner("spinner");
 
+//initial state
 let currentPage = 1;
 let totalPosts = 0;
 
