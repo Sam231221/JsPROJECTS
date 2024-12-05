@@ -1,5 +1,6 @@
 class Calculator {
   constructor() {
+    //Initially, Setting atttributes to a particular value
     this.previousOperand = "";
     this.currentOperand = "0";
     this.operation = undefined;
@@ -161,6 +162,7 @@ class Calculator {
 
 const calculator = new Calculator();
 
+//when a user press any button on the calculator, perform the following action
 document.querySelector(".buttons").addEventListener("click", (e) => {
   if (!e.target.matches("button")) return;
 
@@ -209,6 +211,7 @@ document.querySelector(".buttons").addEventListener("click", (e) => {
   calculator.updateDisplay();
 });
 
+//when a user press a key on the keyboard, perform the following action
 document.addEventListener("keydown", (e) => {
   const key = e.key;
   if (/^[0-9.]$/.test(key)) {
